@@ -27,7 +27,7 @@ public class CalendarUtil {
 	**/
 	public static int NumDaysInMonth(int year, int month) {
 		
-		int baseDays = DaysInMonth[month];
+		int baseDays = DaysInMonth[(month + 1)]; //BUG This will calculate the next months days not the number of days for the current month
 	
 		if(IsLeapYear(year) && (month == FEBRUARY)) {
 				baseDays = baseDays + 1;

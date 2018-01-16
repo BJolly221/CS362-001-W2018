@@ -112,7 +112,7 @@ public class Appt implements  Comparable<Appt>{
     private void isValid() {
     	int NumDaysInMonth= CalendarUtil.NumDaysInMonth(startYear,startMonth-1);
     				
-    	if(startHour<0 || startHour>23)
+    	if(startHour<0 || startHour>14) //BUG This will make any hour greater than 14 count as a invalid input and should be 23
     		this.valid=false;
     	else
         	if(startMinute<0 || startMinute>59)
@@ -225,7 +225,7 @@ public class Appt implements  Comparable<Appt>{
     }
     private void setRecurDays(int[] recurDays) {
         if (recurDays == null) {
-            this.recurDays = new int[0];
+            this.recurDays = new int[1]; //BUG: If there are no recurring days then, it will default to recur once  instead of zero
         }
         else {
             this.recurDays = recurDays;

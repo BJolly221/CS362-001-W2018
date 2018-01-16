@@ -55,7 +55,7 @@ public class CalDay {
 		int month = cal.get(cal.MONTH);
 		int year = cal.get(cal.YEAR);
 	
-		setDay(day);
+		setDay(day+1); //BUG This will add a day to a the value and cause some a date to be fake if the day is greater than the max number of days in a month. 
 		setMonth(month);
 		setYear(year);
 	

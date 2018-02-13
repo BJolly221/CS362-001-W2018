@@ -15,7 +15,8 @@ public class CalDayTest {
 
 	 @Test
 	  public void test01()  throws Throwable  {
-
+		 CalDay calday = new CalDay();
+		assertFalse(calday.isValid());
 	 }
 	 @Test
 	  public void test02()  throws Throwable  {

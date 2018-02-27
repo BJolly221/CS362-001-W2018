@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 
 public class ApptRandomTest {
 	private static final long TestTimeout = 60 * 500 * 1; /* Timeout at 30 seconds */
-	private static final int NUM_TESTS=100;
+	private static final int NUM_TESTS=100; //100 500
 
 	/**
 	 * Return a randomly selected method to be tests !.
@@ -108,7 +108,123 @@ public class ApptRandomTest {
 	 
 		 System.out.println("Done testing...");
 	 }
+	 
+	 @Test
+	  public void testSetRecurDays()  throws Throwable  {
 
+		 long startTime = Calendar.getInstance().getTimeInMillis();
+		 long elapsed = Calendar.getInstance().getTimeInMillis() - startTime;
+		 int falsetest = 0;
+		 int truetest = 0;
+		 try{ 
+			for (int iteration = 0; elapsed < TestTimeout; iteration++) {
+				long randomseed =System.currentTimeMillis(); //10
+	//			System.out.println(" Seed:"+randomseed );
+				Random random = new Random(randomseed);
+				
+				 int startHour=ValuesGenerator.getRandomIntBetween(random,-10, 24);
+				 int startMinute=ValuesGenerator.getRandomIntBetween(random, -1, 60);
+				 int startDay=ValuesGenerator.getRandomIntBetween(random, -1, 32);
+				 int startMonth=ValuesGenerator.getRandomIntBetween(random, 1, 11);
+				 int startYear=ValuesGenerator.RandInt(random);
+				 String title="Birthday Party";
+				 String description="This is my birthday party.";
+				 //Construct a new Appointment object with the initial data	 
+				 Appt appt = new Appt(startHour,
+				          startMinute ,
+				          startDay ,
+				          startMonth ,
+				          startYear ,
+				          title,
+				         description);
+			 //if(!appt.getValid())continue;
+				 int sizeArray=ValuesGenerator.getRandomIntBetween(random, 0, 8);
+				   int[] recurDays=ValuesGenerator.generateRandomArray(random, sizeArray);
+				   int recur=ApptRandomTest.RandomSelectRecur(random);
+				   int recurIncrement = ValuesGenerator.RandInt(random);
+				   int recurNumber=ApptRandomTest.RandomSelectRecurForEverNever(random);
+				   appt.setRecurrence(recurDays, recur, recurIncrement, recurNumber);
+
+			for (int i = 0; i < NUM_TESTS; i++) {
+				if(sizeArray % 4 == 0)
+				{
+					int [] tRecurDays = null;
+					appt.setRecurrence(tRecurDays, recur, recurIncrement, recurNumber);
+					assertEquals(0, appt.getRecurDays().length);
+					falsetest++;
+					}
+				else {
+					assertEquals(sizeArray, appt.getRecurDays().length);
+					truetest++;
+					}
+				}
+				
+				 elapsed = (Calendar.getInstance().getTimeInMillis() - startTime);
+			        if((iteration%10000)==0 && iteration!=0 )
+			              System.out.println("elapsed time: "+ elapsed + " of "+TestTimeout);
+			 
+			}
+		}catch(NullPointerException e){
+			
+		}
+	 
+		 System.out.println("Done testing... False test:" + falsetest + " True Test:" + truetest);
+	 }
+	 @Test
+	  public void testIsValid()  throws Throwable  {
+
+		 long startTime = Calendar.getInstance().getTimeInMillis();
+		 long elapsed = Calendar.getInstance().getTimeInMillis() - startTime;
+		 int falsetest = 0;
+		 int truetest = 0;
+		 System.out.println(falsetest +" " + truetest);
+		try{ 
+			for (int iteration = 0; elapsed < TestTimeout; iteration++) {
+				long randomseed =System.currentTimeMillis(); //10
+	//			System.out.println(" Seed:"+randomseed );
+				Random random = new Random(randomseed);
+				
+				 int startHour=ValuesGenerator.getRandomIntBetween(random,-10, 24);
+				 int startMinute=ValuesGenerator.getRandomIntBetween(random, -1, 60);
+				 int startDay=ValuesGenerator.getRandomIntBetween(random, -1, 32);
+				 int startMonth=ValuesGenerator.getRandomIntBetween(random, 1, 11);
+				 int startYear=ValuesGenerator.RandInt(random);
+				 String title="Birthday Party";
+				 String description="This is my birthday party.";
+				 //Construct a new Appointment object with the initial data	 
+				 Appt appt = new Appt(startHour,
+				          startMinute ,
+				          startDay ,
+				          startMonth ,
+				          startYear ,
+				          title,
+				         description);
+			 //if(!appt.getValid())continue;
+				 
+			for (int i = 0; i < NUM_TESTS; i++) {
+				if(appt.getValid() == false)
+				{
+					assertFalse(appt.getValid());
+					falsetest++;
+					}
+				else {
+					assertTrue(appt.getValid());
+					truetest++;
+				}
+				}
+				
+				 elapsed = (Calendar.getInstance().getTimeInMillis() - startTime);
+			        if((iteration%10000)==0 && iteration!=0 )
+			              System.out.println("elapsed time: "+ elapsed + " of "+TestTimeout);
+			 
+			}
+		}catch(NullPointerException e){
+			
+		}
+	 
+		 System.out.println("Done testing... False test:" + falsetest + " True Test:" + truetest);
+	 }
+	 
 
 	
 }

@@ -22,8 +22,8 @@ public class CalDayRandomTest {
 	 * Random Test Generator  for CalDay class.
 	 */
 	 
-		private static final long TestTimeout = 60 * 500 * 1; /* Timeout at 30 seconds */
-		private static final int NUM_TESTS=100; //100 500
+		private static final long TestTimeout = 60 * 250 * 1; /* Timeout at 30 seconds */
+		private static final int NUM_TESTS=10; //100 500
 
 		/**
 		 * Return a randomly selected method to be tests !.

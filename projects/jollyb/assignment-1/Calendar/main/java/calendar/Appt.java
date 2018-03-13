@@ -110,9 +110,16 @@ public class Appt implements  Comparable<Appt>{
      * @sets valid to true if the appointment is valid
      */
     private void isValid() {
-    	int NumDaysInMonth= CalendarUtil.NumDaysInMonth(startYear,startMonth-1);
-    				
-    	if(startHour<0 || startHour>14) //BUG This will make any hour greater than 14 count as a invalid input and should be 23
+    	if(startMonth<1 || startMonth>12)
+    		{
+    			this.valid=false;
+    			int NumDaysInMonth= CalendarUtil.NumDaysInMonth(startYear,startMonth-1);
+    		}
+    	
+    	else if(startYear < 0 ) {
+    		this.valid=false;
+    	}			
+    	else if(startHour<0 || startHour>14) //BUG This will make any hour greater than 14 count as a invalid input and should be 23
     		this.valid=false;
     	else
         	if(startMinute<0 || startMinute>59)

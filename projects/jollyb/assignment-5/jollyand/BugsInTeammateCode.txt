@@ -1,0 +1,7 @@
+Bug-Reports
+	Bug 1
+		Found on line 116 in the Appt.java class by the test: testStartHour() In the ApptTest.java class
+			If an startHour is less than zero then it will be valid hour. This should be "this.valid=false"
+	Bug 2
+		Found on line 230 in Appt.java class by the test: testSetRecurDays() in the ApptRandomTest.java class	
+			Will always report true but the line should be "if (recurDays == null)".
